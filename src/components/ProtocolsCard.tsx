@@ -18,6 +18,8 @@ import { Starmaker } from '../protocols/starmaker.ts';
 import { Goal3 } from '../protocols/goal3.ts';
 import { Rollup } from '../protocols/rollup.ts';
 import { ZkSyncId } from '../protocols/zksyncid.ts';
+import { ZkSwap } from '../protocols/zkswap.ts';
+import { XYFinance } from '../protocols/xyfinance.ts';
 
 interface ProtocolsCardProps {
   address: string;
@@ -57,6 +59,8 @@ const ProtocolsCard: FC<ProtocolsCardProps> = ({ address, transactions }) => {
     setProtocolsState((prevState) => [...prevState, Goal3.getProtocolsState(transactions, address)]);
     setProtocolsState((prevState) => [...prevState, Rollup.getProtocolsState(transactions, address)]);
     setProtocolsState((prevState) => [...prevState, ZkSyncId.getProtocolsState(transactions, address)]);
+    setProtocolsState((prevState) => [...prevState, ZkSwap.getProtocolsState(transactions, address)]);
+    setProtocolsState((prevState) => [...prevState, XYFinance.getProtocolsState(transactions, address)]);
 
     setProtocolsState((prevState) => prevState.sort((a, b) => b.volume - a.volume));
   };

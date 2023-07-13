@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
 import { Transaction } from '../services/explorer.ts';
-import { sortTransfer } from '../utils/utils.ts';
 
 interface VolumeCardProps {
   address: string;
@@ -15,15 +14,13 @@ const VolumeCard: FC<VolumeCardProps> = ({ address, transactions }) => {
     setChange(0);
     setVolume(0);
     transactions.forEach((transaction) => {
-      const erc20Transfers = transaction.erc20Transfers.sort(sortTransfer);
-
-      if (erc20Transfers.length === 0) return;
-
-      const tmpVolume =
-        parseInt(erc20Transfers[0].amount, 16) *
-        10 ** -erc20Transfers[0].tokenInfo.decimals *
-        erc20Transfers[0].tokenInfo.usdPrice;
-
+      const transfers = transaction.transfers.sort(
+        (a, b) =>
+          parseInt(b.amount) * 10 ** -b.token.decimals * b.token.price -
+          parseInt(a.amount) * 10 ** -a.token.decimals * a.token.price,
+      );
+      if (transfers.length === 0) return;
+      const tmpVolume = parseInt(transfers[0].amount) * 10 ** -transfers[0].token.decimals * transfers[0].token.price;
       setVolume((prev) => prev + tmpVolume);
       if (new Date(transaction.receivedAt).getTime() >= new Date().getTime() - 86400 * 7 * 1000) {
         setChange((prev) => prev + tmpVolume);
