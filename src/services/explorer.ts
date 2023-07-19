@@ -40,6 +40,16 @@ export interface Transaction {
   transfers: Transfer[];
   ethValue: number;
 }
+export type TransactionData = {
+  interactions: number;
+  interactions7Change: number;
+  volume: number;
+  volume7Change: number;
+  fees: number;
+  fees7Change: number;
+  transactions: Transaction[];
+  index: number
+};
 
 export const getTokenList = async (address: string): Promise<Token[]> => {
   return axios

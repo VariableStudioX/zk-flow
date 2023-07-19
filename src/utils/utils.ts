@@ -1,4 +1,4 @@
-import { Transaction } from '../services/explorer.ts';
+import { Transaction, TransactionData } from '../services/explorer.ts';
 
 const getTimeAgo = (date: string) => {
   const seconds = (new Date().getTime() - new Date(date).getTime()) / 1000;
@@ -112,5 +112,58 @@ const getWeekNumber = (date: Date): string => {
 
   return `${year}-${weekIndex}`;
 };
+const dataTransform = (address: string, transactions: Transaction[], index: number): TransactionData => {
+  const orginTransactions = [...transactions];
 
-export { getTimeAgo, countTransactionPeriods, getWeekNumber, countAllTransactionPeriods };
+  let interactions = 0;
+  let interactionsChange = 0;
+
+  let fees = 0;
+  let feesChange = 0;
+
+  let volume = 0;
+  let volumeChange = 0;
+
+  transactions.forEach((transaction) => {
+    
+    // interactions
+    if (transaction.from.toLowerCase() === address.toLowerCase()) {
+      interactions = interactions + 1;
+      if (new Date(transaction.receivedAt).getTime() >= new Date().getTime() - 86400 * 7 * 1000) {
+        interactionsChange = interactionsChange + 1;
+      }
+    }
+
+    // volume
+    const transfers = transaction.transfers.sort(
+      (a, b) =>
+        parseInt(b.amount) * 10 ** -b.token.decimals * b.token.price -
+        parseInt(a.amount) * 10 ** -a.token.decimals * a.token.price,
+    );
+    if (transfers.length === 0) return;
+    const tmpVolume = parseInt(transfers[0].amount) * 10 ** -transfers[0].token.decimals * transfers[0].token.price;
+    volume = volume + tmpVolume;
+    if (new Date(transaction.receivedAt).getTime() >= new Date().getTime() - 86400 * 7 * 1000) {
+      volumeChange = volumeChange + tmpVolume;
+    }
+
+    // fee
+    const tmpFees = parseInt(transaction.fee, 16) * 10 ** -18 * transaction.ethValue;
+    fees = fees + tmpFees;
+    if (new Date(transaction.receivedAt).getTime() >= new Date().getTime() - 86400 * 7 * 1000) {
+      feesChange = feesChange + tmpFees;
+    }
+  });
+
+  return {
+    transactions: orginTransactions,
+    interactions,
+    interactions7Change: interactionsChange,
+    volume,
+    volume7Change: volumeChange,
+    fees,
+    fees7Change: feesChange,
+    index
+  };
+};
+export { getTimeAgo, countTransactionPeriods, getWeekNumber, countAllTransactionPeriods, dataTransform };
