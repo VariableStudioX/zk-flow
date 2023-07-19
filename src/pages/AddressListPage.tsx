@@ -5,13 +5,30 @@ import list from '../../address.ts';
 import { Table } from 'antd';
 import { dataTransform } from '../utils/utils.ts';
 
+const search = window.location.search;
+const params = new URLSearchParams(search);
+const addresslist = params.get('addresslist');
+
+let addresss: string[] = [];
+if (!addresslist){
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addresss = list.wwx_evm;
+}
+
+if (addresslist === 'wwx_evm'){
+  addresss = list.wwx_evm;
+}
+
+if (addresslist === 'gkk_evm'){
+  addresss = list.gkk_evm;
+}
+
 const AddressListPage = () => {
-  const addresss = list;
   const [transactionDataList, setTransactionDataList] = useState<TransactionData[]>([]);
 
   useEffect(() => {
     fetchTransactionList(addresss);
-  }, [addresss]);
+  }, []);
 
   const fetchTransactionList = async (ads: string[]) => {
     const transactionsList = await Promise.all(ads.map((ad) => getTransactionsList(ad)));
