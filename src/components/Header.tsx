@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
-  const [displayModal, setDisplayModal] = useState<boolean>(true);
+  const [displayModal, setDisplayModal] = useState<boolean>(false);
   const [address, setAddress] = useState<string>('');
 
   const handleSubmit = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -26,7 +26,7 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
         <a className="flex items-center bg" href="/zk-flow/">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">zkFlow</span>
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">airdropFlow</span>
         </a>
         {hasSearchBar && (
           <div className="flex md:order-2">
@@ -103,7 +103,7 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
                 </svg>
                 <span className="sr-only">Light bulb</span>
               </span>
-              <div>
+              {/* <div>
                 <div>
                   <span>If you want to tip me a beer for my work (or make one more transaction) you can on</span>
                   <span
@@ -122,14 +122,14 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
                 <div>
                   <span>You can also support me by using my referral code on goal3:</span>
                   <span
-                    onClick={() => window.open('https://beta.goal3.xyz?r=zkflow', '_blank')}
+                    onClick={() => window.open('https://beta.goal3.xyz?r=airdropFlow', '_blank')}
                     className="text-white font-bold whitespace-pre-wrap cursor-pointer"
                   >
                     {' '}
-                    zkflow
+                    airdropFlow
                   </span>
                 </div>
-              </div>
+              </div> */}
             </p>
           </div>
           <div className="flex items-center">
