@@ -54,6 +54,7 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
       legend: legend,
       tooltip: {
         trigger: 'axis',
+        enterable: true,
         axisPointer: {
           type: 'cross',
         },

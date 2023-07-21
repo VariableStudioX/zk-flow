@@ -4,6 +4,7 @@
 
 body {
     background-color: rgb(17, 24, 39);
+    
 }
 
 @layer utilities {
@@ -16,3 +17,8 @@ body {
         background: #9b9b9b;
     }
 }
+*{
+    -webkit-user-select: text !important;
+    user-select: text !important;
+  }
+  
