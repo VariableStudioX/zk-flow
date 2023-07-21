@@ -48,7 +48,8 @@ export type TransactionData = {
   fees: number;
   fees7Change: number;
   transactions: Transaction[];
-  index: number
+  index: number;
+  address: string;
 };
 
 export const getTokenList = async (address: string): Promise<Token[]> => {

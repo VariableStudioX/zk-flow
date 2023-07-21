@@ -163,7 +163,8 @@ const dataTransform = (address: string, transactions: Transaction[], index: numb
     volume7Change: volumeChange,
     fees,
     fees7Change: feesChange,
-    index
+    index,
+    address
   };
 };
 export { getTimeAgo, countTransactionPeriods, getWeekNumber, countAllTransactionPeriods, dataTransform };
