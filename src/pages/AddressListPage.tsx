@@ -29,7 +29,7 @@ if (addresslist === 'gkk_evm') {
 
 const AddressListPage = () => {
   const [transactionDataList, setTransactionDataList] = useState<TransactionData[]>([]);
-  const [mode, setMode] = useState<TabPosition>('table');
+  const [mode, setMode] = useState<TabPosition>('chart');
   useEffect(() => {
     fetchTransactionList(addresss);
   }, []);
@@ -56,8 +56,8 @@ const AddressListPage = () => {
       <Header hasSearchBar />
       <div className="mt-20 place-items-center mb-20 ml-10 mr-10 bg-slate-100">
         <Radio.Group onChange={handleModeChange} value={mode} className="mb-4 pt-4 pl-2">
-          <Radio.Button value="table">Table</Radio.Button>
           <Radio.Button value="chart">Chart</Radio.Button>
+          <Radio.Button value="table">Table</Radio.Button>
         </Radio.Group>
         {mode === 'table' ? (
           <OverviewTable transactionDataList={transactionDataList} />
