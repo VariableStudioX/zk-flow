@@ -3,6 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { TransactionData } from '../services/explorer';
 import { ProtocolType, getProtocolMethod } from '../protocols';
 import { ProtocolState } from './ProtocolsCard';
+import Paragraph from 'antd/es/typography/Paragraph';
 interface ChartProps {
   transactionDataList: TransactionData[] | [];
   protocol: ProtocolType;
@@ -20,6 +21,7 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
   const [xAxisData, setXAxisData] = useState<string[]>([]);
   const [legend, setLegend] = useState<Legend[]>([]);
   const [series, setSeries] = useState<Series[]>([]);
+  const [tooltipAddress, setTooltipAddress] = useState<string>('');
   const seriesKeys = protocolMapKeys[protocol] || DefaultKeys;
 
   useEffect(() => {
@@ -55,8 +57,12 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
       tooltip: {
         trigger: 'axis',
         enterable: true,
+        alwaysShowContent: true,
         axisPointer: {
           type: 'cross',
+        },
+        formatter: (params: any) => {
+          setTooltipAddress(params[0].axisValue);
         },
       },
       grid: {
@@ -87,7 +93,15 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
     return option;
   };
   const option = getOption();
-  return <ReactEcharts option={option} className="flex  flex-col-reverse" />;
+  return (
+    <>
+      <div>
+        <span className=" font-bold ">当前地址：</span>
+        <Paragraph copyable={{ text: tooltipAddress }}>{tooltipAddress}</Paragraph>
+      </div>
+      <ReactEcharts option={option} className="flex  flex-col-reverse" />;
+    </>
+  );
 };
 export default Chart;
 
