@@ -45,7 +45,7 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
     });
     const nextLegend = {
       data: seriesKeys,
-      selected,
+      // selected,
     };
     setLegend(nextLegend as any);
     setSeries(series);

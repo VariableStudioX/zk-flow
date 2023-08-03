@@ -114,6 +114,12 @@ const assignTransferValues = async (transactions: Transaction[]) => {
   });
 };
 
+export function sleep(millisecond = 0) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, millisecond);
+  });
+}
+
 export const getTransactionsList = async (address: string): Promise<Transaction[]> => {
   let url = `https://block-explorer-api.mainnet.zksync.io/transactions?address=${address}&limit=100&page=1`;
   const transactions: Transaction[] = [];

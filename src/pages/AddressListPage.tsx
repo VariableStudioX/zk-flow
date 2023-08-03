@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTransactionsList, TransactionData } from '../services/explorer.ts';
+import { getTransactionsList, sleep, TransactionData } from '../services/explorer.ts';
 import Header from '../components/Header.tsx';
 import list from '../../address.ts';
 import { dataTransform } from '../utils/utils.ts';
@@ -32,11 +32,24 @@ const AddressListPage = () => {
   const [mode, setMode] = useState<TabPosition>('chart');
   useEffect(() => {
     fetchTransactionList(addresss);
+    console.log('fetchTransactionList')
   }, []);
 
+  // const fetchTransactionList = async (adds: string[]) => {
+  //   const transactionsList = await Promise.all(adds.map((ad) => getTransactionsList(ad)));
+  //   const transactionDataList = transactionsList.map((trans, index) => dataTransform(adds[index], trans, index));
+  //   setTransactionDataList(transactionDataList);
+  // };
+
+  // 并行改串行
   const fetchTransactionList = async (adds: string[]) => {
-    const transactionsList = await Promise.all(adds.map((ad) => getTransactionsList(ad)));
-    const transactionDataList = transactionsList.map((trans, index) => dataTransform(adds[index], trans, index));
+    const transactionDataList = [];
+    for (const ad of adds) {
+      const trans = await getTransactionsList(ad);
+      await sleep(200);
+      const transactionData = dataTransform(ad, trans, adds.indexOf(ad));
+      transactionDataList.push(transactionData);
+    }
     setTransactionDataList(transactionDataList);
   };
 
@@ -110,5 +123,9 @@ const itemOptios: {
   {
     label: 'zkswap',
     key: 'zkswap',
+  },
+  {
+    label: 'zkSyncEraPortal',
+    key: 'zksynceraportal',
   },
 ];
