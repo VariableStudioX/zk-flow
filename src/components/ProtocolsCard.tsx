@@ -80,7 +80,7 @@ const ProtocolsCard: FC<ProtocolsCardProps> = ({ address, transactions }) => {
 
   useEffect(() => {
     getProtocolsState();
-  }, [transactions]);
+  }, []);
 
   return (
     <div className="relative mt-1.5 rounded-lg dark:border-gray-700 border border-gray-200 mb-20 ml-4 mr-4">

@@ -107,7 +107,7 @@ export default Chart;
 
 const DefaultKeys = ['interactions', 'lastActivity', 'volume', 'activeDays', 'approves'];
 const protocolMapKeys: Partial<Record<ProtocolType, any>> = {
-  all: ['interactions', 'interactions7Change', 'volume', 'volume7Change', 'fees', 'fees7Change'],
+  overview: ['interactions', 'interactions7Change', 'volume', 'volume7Change', 'fees', 'fees7Change'],
   // goal3: [],
   // holdstation: [],
   // izumi: [],
@@ -121,7 +121,7 @@ const protocolMapKeys: Partial<Record<ProtocolType, any>> = {
 const getProtocolsStateValue = (key: keyof ProtocolState, state: ProtocolState) => state[key];
 const getTransactionDataValue = (key: keyof TransactionData, data: TransactionData) => data[key];
 const getSerieItemData = (prorocol: ProtocolType, key: any, state: ProtocolState, data: TransactionData) => {
-  if (prorocol === 'all') {
+  if (prorocol === 'overview') {
     return getTransactionDataValue(key, data);
   }
   return getProtocolsStateValue(key, state);

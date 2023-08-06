@@ -32,7 +32,7 @@ const AddressListPage = () => {
   const [mode, setMode] = useState<TabPosition>('chart');
   useEffect(() => {
     fetchTransactionList(addresss);
-    console.log('fetchTransactionList')
+    console.log('fetchTransactionList');
   }, []);
 
   // const fetchTransactionList = async (adds: string[]) => {
@@ -56,10 +56,21 @@ const AddressListPage = () => {
   const handleModeChange = (e: RadioChangeEvent) => {
     setMode(e.target.value);
   };
-
   const items = itemOptios.map((item) => {
     return {
-      label: item.label,
+      label: (
+        <div className="flex flex-row items-center ">
+          <img
+            className={'w-4 h-4 rounded-full mr-2 '}
+            src={'/zk-flow/protocol/' + item.key + '.png'}
+            alt=""
+            // onClick={() => {
+            //   window.open(item.url, '_blank');
+            // }}
+          />
+          <div className=" mr-2 w-20 text-ellipsis overflow-hidden text-left"> {item.label}</div>
+        </div>
+      ),
       key: item.key,
       children: <Chart transactionDataList={transactionDataList} protocol={item.key} />,
     };
@@ -90,11 +101,15 @@ const itemOptios: {
 }[] = [
   {
     label: '概览',
-    key: 'all',
+    key: 'overview',
   },
   {
     label: 'syncswap',
     key: 'syncswap',
+  },
+  {
+    label: 'odos',
+    key: 'odos',
   },
   {
     label: 'velocore',
@@ -109,6 +124,10 @@ const itemOptios: {
     key: 'muteio',
   },
   {
+    label: 'izumi',
+    key: 'izumi',
+  },
+  {
     label: 'goal3',
     key: 'goal3',
   },
@@ -117,15 +136,40 @@ const itemOptios: {
     key: 'spacefi',
   },
   {
+    label: 'starmaker',
+    key: 'starmaker',
+  },
+  {
+    label: 'xyfinance',
+    key: 'xyfinance',
+  },
+  {
+    label: 'Rollup Finance',
+    key: 'rollup',
+  },
+  {
+    label: 'Pancakeswap Finance',
+    key: 'pancakeswap',
+  },
+  {
+    label: 'zkswap',
+    key: 'zkSwap',
+  },
+  {
+    label: 'zkSyncid',
+    key: 'zksyncid',
+  },
+  {
     label: 'holdstation',
     key: 'holdstation',
   },
   {
-    label: 'zkswap',
-    key: 'zkswap',
+    label: 'orbiter',
+    key: 'orbiter',
   },
+
   {
-    label: 'zkSyncEraPortal',
+    label: 'zkSyncEra Bridge',
     key: 'zksynceraportal',
   },
 ];

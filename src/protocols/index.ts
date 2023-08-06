@@ -10,15 +10,17 @@ import { Rollup } from './rollup.ts';
 import { ZkSyncId } from './zksyncid.ts';
 import { ZkSwap } from './zkswap.ts';
 import { XYFinance } from './xyfinance.ts';
-import { All } from './all.ts';
+import { Default } from './default.ts';
 import { SyncSwap } from './syncswap.ts';
 import { ZkSyncEraPortal } from './zksynceraportal.ts';
 import { ZkSyncNameService } from './zksyncnameservice.ts';
 import { Mute } from './muteio.ts';
 import { Velocore } from './velocore.ts';
+import { PancakeSwap } from './pancakeswap.ts';
+import { Odos } from './odos.ts';
 
 export type ProtocolType =
-  | 'all'
+  | 'overview'
   | 'goal3'
   | 'holdstation'
   | 'izumi'
@@ -27,19 +29,21 @@ export type ProtocolType =
   | 'spacefi'
   | 'onchaintrade'
   | 'orbiter'
-  | 'zkSyncid'
-  | 'zkswap'
+  | 'zksyncid'
+  | 'zkSwap'
   | 'rollup'
   | 'starmaker'
   | 'xyfinance'
   | 'zksynceraportal'
   | 'velocore'
   | 'zksyncnameservice'
-  | 'syncswap';
+  | 'syncswap'
+  | 'odos'
+  | 'pancakeswap';
 
 export function getProtocolMethod(protocol: ProtocolType, key: 'getProtocolsState' = 'getProtocolsState') {
   const handlers: Record<ProtocolType, any> = {
-    all: All,
+    overview: Default,
     orbiter: Orbiter,
     holdstation: Holdstation,
     izumi: Izumi,
@@ -49,14 +53,16 @@ export function getProtocolMethod(protocol: ProtocolType, key: 'getProtocolsStat
     starmaker: Starmaker,
     goal3: Goal3,
     rollup: Rollup,
-    zkSyncid: ZkSyncId,
-    zkswap: ZkSwap,
+    zksyncid: ZkSyncId,
+    zkSwap: ZkSwap,
     xyfinance: XYFinance,
     syncswap: SyncSwap,
     zksyncnameservice: ZkSyncNameService,
     zksynceraportal: ZkSyncEraPortal,
     muteio: Mute,
     velocore: Velocore,
+    pancakeswap: PancakeSwap,
+    odos: Odos,
   };
   return handlers[protocol][key];
 }

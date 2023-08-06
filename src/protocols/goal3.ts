@@ -52,4 +52,10 @@ export const Goal3 = {
 
     return protocolState;
   },
+  config: {
+    name: 'Goal3',
+    id: 'goal3',
+    url: 'https://beta.goal3.xyz/',
+    tag: 'Gasless',
+  },
 };
