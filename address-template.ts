@@ -5,4 +5,4 @@ const accounts = {
   wwx_starknet: [],
 };
 
-export default accounts.gkk_evm;
+export default accounts;
