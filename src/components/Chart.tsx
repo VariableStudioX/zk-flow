@@ -96,6 +96,9 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
   return (
     <>
       <div>
+        <h3 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+          交互概览
+        </h3>
         <span className=" font-bold ">当前地址：</span>
         <Paragraph copyable={{ text: tooltipAddress }}>{tooltipAddress}</Paragraph>
       </div>

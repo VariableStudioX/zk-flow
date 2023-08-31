@@ -7,12 +7,16 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
   const [displayModal, setDisplayModal] = useState<boolean>(false);
   const [address, setAddress] = useState<string>('');
+  const [type, setType] = useState<string>('TX');
 
   const handleSubmit = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key !== 'Enter') return;
     if (address === '' || address.length !== 42 || !address.startsWith('0x')) {
       alert('Please enter valid address');
       return;
+    }
+    if (type === 'Contract') {
+      return (window.location.search = '?address=' + address + '&type=Contract');
     }
     window.location.search = '?address=' + address;
   };
@@ -26,11 +30,11 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
         <a className="flex items-center bg" href="/zk-flow/">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">airdropFlow</span>
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AirdropFlow</span>
         </a>
         {hasSearchBar && (
           <div className="flex md:order-2">
-            <div className="relative md:block sm:w-9/12 md:w-96">
+            <div className="relative md:block sm:w-10/12 md:w-96">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none bg">
                 <svg
                   className="w-5 h-5 text-gray-500"
@@ -50,14 +54,54 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
               <input
                 type="text"
                 id="search-navbar"
-                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-2 pl-10 pr-20 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search..."
                 onChange={(e) => setAddress(e.target.value)}
                 onKeyDown={handleSubmit}
               />
+              <div className="absolute inset-y-0 right-0 flex items-center">
+                <select
+                  id="currency"
+                  name="currency"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  className="h-full rounded-lg rounded-l-none border  border-l-0  bg-transparent py-0 pl-2 pr-7 text-gray-500  border-transparent  bg-gray-50   dark:placeholder-gray-400 dark:text-white   sm:text-sm "
+                >
+                  <option value="TX">TX</option>
+                  <option value="Contract">Contract</option>
+                </select>
+              </div>
             </div>
           </div>
         )}
+        {/* <div className="relative mt-2 rounded-md shadow-sm">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <span className="text-gray-500 sm:text-sm">$</span>
+          </div>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            // className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+
+            placeholder="0.00"
+          />
+          <div className="absolute inset-y-0 right-0 flex items-center">
+            <label htmlFor="currency" className="sr-only">
+              Currency
+            </label>
+            <select
+              id="currency"
+              name="currency"
+              className="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+            >
+              <option>USD</option>
+              <option>CAD</option>
+              <option>EUR</option>
+            </select>
+          </div>
+        </div> */}
         <div className="items-center justify-between hidden w-full md:flex sm:w-auto" id="navbar-search">
           <div className="relative mt-3 md:hidden">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -115,18 +159,16 @@ const Header: FC<HeaderProps> = ({ hasSearchBar }) => {
                     }
                     className="text-white font-bold whitespace-pre-wrap cursor-pointer"
                   >
-                    {' '}
                     0xF859dE92A63070C54d05E33a4e99D707a34FDb12
                   </span>
                 </div>
                 <div>
                   <span>You can also support me by using my referral code on goal3:</span>
                   <span
-                    onClick={() => window.open('https://beta.goal3.xyz?r=airdropFlow', '_blank')}
+                    onClick={() => window.open('https://beta.goal3.xyz?r=AirdropFlow', '_blank')}
                     className="text-white font-bold whitespace-pre-wrap cursor-pointer"
                   >
-                    {' '}
-                    airdropFlow
+                    AirdropFlow
                   </span>
                 </div>
               </div> */}

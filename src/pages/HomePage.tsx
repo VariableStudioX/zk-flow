@@ -16,9 +16,9 @@ const HomePage = () => {
       <Header />
       <div className="grid mt-36 place-items-center">
         <div className="grid place-items-center">
-          <h1 className="font-bold text-6xl text-black dark:text-white mb-10 ">airdropFlow</h1>
+          <h1 className="font-bold text-6xl text-black dark:text-white mb-10 ">AirdropFlow</h1>
           <p className="text-black dark:text-white font-light text-2xl text-center mr-4 ml-4 max-w-4xl">
-            airdropFlow is a website where you can track your address and see how many volume you did on different zkSync
+            AirdropFlow is a website where you can track your address and see how many volume you did on different zkSync
             protocols.
           </p>
           <div className="w-9/12 mt-20">

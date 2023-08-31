@@ -36,11 +36,7 @@ const AddressListPage = () => {
     console.log('fetchTransactionList');
   }, []);
 
-  // const fetchTransactionList = async (adds: string[]) => {
-  //   const transactionsList = await Promise.all(adds.map((ad) => getTransactionsList(ad)));
-  //   const transactionDataList = transactionsList.map((trans, index) => dataTransform(adds[index], trans, index));
-  //   setTransactionDataList(transactionDataList);
-  // };
+
 
   // 并行改串行
   const fetchTransactionList = async (adds: string[]) => {
@@ -76,6 +72,16 @@ const AddressListPage = () => {
       children: (
         <div className=" overflow-y-auto">
           <Chart transactionDataList={transactionDataList} protocol={item.key} />
+          {item.key === 'overview' && (
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-white px-3 text-base font-semibold leading-6 text-gray-900">分割线</span>
+              </div>
+            </div>
+          )}
           {item.key === 'overview' && <ProtocolsPie transactionDataList={transactionDataList} addressList={addresss} />}
         </div>
       ),
