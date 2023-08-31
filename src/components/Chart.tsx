@@ -105,7 +105,8 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
 };
 export default Chart;
 
-const DefaultKeys = ['interactions', 'lastActivity', 'volume', 'activeDays', 'approves'];
+// const DefaultKeys = ['interactions', 'lastActivity', 'volume', 'activeDays', 'approves'];
+const DefaultKeys = ['interactions'];
 const protocolMapKeys: Partial<Record<ProtocolType, any>> = {
   overview: ['interactions', 'interactions7Change', 'volume', 'volume7Change', 'fees', 'fees7Change'],
   // goal3: [],
