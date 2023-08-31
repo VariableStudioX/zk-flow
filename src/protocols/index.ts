@@ -41,6 +41,28 @@ export type ProtocolType =
   | 'odos'
   | 'pancakeswap';
 
+export const protocolTypes = [
+  'goal3',
+  'holdstation',
+  'izumi',
+  'maverick',
+  'muteio',
+  'spacefi',
+  'onchaintrade',
+  'orbiter',
+  'zksyncid',
+  'zkSwap',
+  'rollup',
+  'starmaker',
+  'xyfinance',
+  'zksynceraportal',
+  'velocore',
+  'zksyncnameservice',
+  'syncswap',
+  'odos',
+  'pancakeswap',
+];
+
 export function getProtocolMethod(protocol: ProtocolType, key: 'getProtocolsState' = 'getProtocolsState') {
   const handlers: Record<ProtocolType, any> = {
     overview: Default,

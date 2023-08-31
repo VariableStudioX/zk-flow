@@ -6,6 +6,7 @@ import { dataTransform } from '../utils/utils.ts';
 import OverviewTable from '../components/OverviewTable.tsx';
 import { Radio, RadioChangeEvent, Tabs } from 'antd';
 import Chart from '../components/Chart.tsx';
+import ProtocolsPie from '../components/ProtocolsPie.tsx';
 import { ProtocolType } from '../protocols/index.ts';
 
 type TabPosition = 'table' | 'chart';
@@ -72,7 +73,12 @@ const AddressListPage = () => {
         </div>
       ),
       key: item.key,
-      children: <Chart transactionDataList={transactionDataList} protocol={item.key} />,
+      children: (
+        <div className=" overflow-y-auto">
+          <Chart transactionDataList={transactionDataList} protocol={item.key} />
+          {item.key === 'overview' && <ProtocolsPie transactionDataList={transactionDataList} addressList={addresss} />}
+        </div>
+      ),
     };
   });
   return (
@@ -86,7 +92,7 @@ const AddressListPage = () => {
         {mode === 'table' ? (
           <OverviewTable transactionDataList={transactionDataList} />
         ) : (
-          <Tabs defaultActiveKey="1" tabPosition="left" style={{ height: 700 }} items={items} />
+          <Tabs defaultActiveKey="1" tabPosition="left" style={{ height: '100%' }} items={items} />
         )}
       </div>
     </>

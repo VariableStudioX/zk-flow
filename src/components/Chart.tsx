@@ -99,7 +99,7 @@ const Chart: FC<ChartProps> = ({ transactionDataList, protocol = 'all' }) => {
         <span className=" font-bold ">当前地址：</span>
         <Paragraph copyable={{ text: tooltipAddress }}>{tooltipAddress}</Paragraph>
       </div>
-      <ReactEcharts option={option} className="flex  flex-col-reverse" />;
+      <ReactEcharts option={option} className="flex  flex-col-reverse" />
     </>
   );
 };
